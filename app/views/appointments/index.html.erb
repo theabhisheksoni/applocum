@@ -1,0 +1,8 @@
+<h1>Appointments</h1>
+<% if current_user.patient? %>
+  <%= link_to 'Schedule an appointment', new_appointment_path %>
+<% end %>
+
+<%= render 'table' %>
+
+<%= link_to 'Back', root_path %>

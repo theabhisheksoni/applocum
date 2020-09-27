@@ -1,0 +1,21 @@
+<%= form_for @appointment do |f| %>
+  <!-- we can set start_hour and end_hour here as well -->
+  <% if @appointment.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@appointment.errors.count, "error") %> prohibited
+        this appointment from being saved:
+      </h2>
+      <ul>
+        <% @appointment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.datetime_select :appointment_date, start_year: DateTime.now.year, ampm: true %>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to 'Back', appointments_path %>

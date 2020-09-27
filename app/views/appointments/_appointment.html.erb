@@ -1,0 +1,20 @@
+<tr>
+  <td><%= appointment.patient.name %></td>
+  <td><%= appointment.patient.email %></td>
+  <td><%= appointment.doctor&.name %></td>
+  <td><%= appointment.doctor&.email %></td>
+  <td><%= appointment.appointment_date %></td>
+  <td>
+    <% if current_user.patient? %>
+      <% if appointment.can_cancel? %>
+        <%= link_to 'Cancel Appointment', appointment_path(appointment), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    <% elsif current_user.doctor? %>
+      <% if appointment.doctor == current_user %>
+        <%= link_to 'Reject Appointment', reject_appointment_path(appointment) %>
+      <% else %>
+        <%= link_to 'Accept Appointment', accept_appointment_path(appointment) %>
+      <% end %>
+    <% end %>
+  </td>
+</tr>

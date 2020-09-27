@@ -1,2 +1,28 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<h1>Appointment schedule system</h1>
+
+<% if current_user.patient? %>
+  <!-- Doctor's listing for patients -->
+  <h2>Doctors</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @doctors.each do |doctor| %>
+        <tr>
+          <td><%= doctor.name %></td>
+          <td><%= doctor.email %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'Schedule an appointment', new_appointment_path %>
+<% elsif current_user.doctor? %>
+  <!-- All appointments for doctors -->
+  <%= render 'appointments/table' %>
+<% end %>
+<br>
+<%= link_to 'My Appointments', appointments_path %>
