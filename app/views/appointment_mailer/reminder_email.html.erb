@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello, <%= @user.name %></h1>
+    <p>
+      You have an appointment scheduled at <%= @appointment.appointment_date %>
+    </p>
+    <p>Details:</p>
+    <% if @user.patient? %>
+      <p>Doctor Name: <%= @appointment.doctor.name %></p>
+      <p>Doctor Email: <%= @appointment.doctor.email %></p>
+    <% elsif @user.doctor? %>
+      <p>Patient Name: <%= @appointment.patient.name %></p>
+      <p>Patient Email: <%= @appointment.patient.email %></p>
+    <% end %>
+    <p>Thanks and have a great day!</p>
+  </body>
+</html>
